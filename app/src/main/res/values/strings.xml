@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">SplashScreen</string>
+<string name="app_name">Spinner Example</string>
+<string-array name="numbers">
+    <item>Editor</item>
+    <item>Writer</item>
+    <item>Administrator</item>
+    <item>Manager</item>
+    <item>Assistant</item>
+</string-array>
 </resources>
