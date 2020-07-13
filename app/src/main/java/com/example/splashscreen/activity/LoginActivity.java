@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.body().isSuccess()) {
                         Toast.makeText(LoginActivity.this, "Logiin berhasil", Toast.LENGTH_SHORT).show();
                         AppService.setToken("Bearer " + response.body().getToken());
-                        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, BookActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
