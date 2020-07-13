@@ -110,8 +110,9 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     if (response.body().isSuccess()) {
                         Log.e("TAG", "Login Success" + response.body().toString());
+
                         AppService.setToken("Bearer " + response.body().getToken());
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, BookActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

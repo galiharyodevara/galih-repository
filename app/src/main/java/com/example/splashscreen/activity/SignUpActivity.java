@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +33,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+
     Button buttonSignUp;
     RadioGroup radioGroup;
     RadioButton radioButton, radioButton2;
@@ -40,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText email, username, password, name;
     private AwesomeValidation awesomeValidation;
     private Retrofit retrofit;
-    private Boolean rbAktif;
+    private boolean rbAktif;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +61,9 @@ public class SignUpActivity extends AppCompatActivity {
         roles = findViewById(R.id.roles);
         radioButton = findViewById(R.id.radioButton);
         radioButton2 = findViewById(R.id.radioButton2);
-        Spinner spinner = findViewById(R.id.roles);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.numbers, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        buttonSignUp = findViewById(R.id.buttonSignUp);
+
+
         buttonSignUp = findViewById(R.id.buttonSignUp);
 
         awesomeValidation.addValidation(this, R.id.username, RegexTemplate.NOT_EMPTY, R.string.invalid_username);
@@ -72,6 +72,8 @@ public class SignUpActivity extends AppCompatActivity {
         awesomeValidation.addValidation(this, R.id.name, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
         awesomeValidation.addValidation(this, R.id.email, RegexTemplate.NOT_EMPTY, R.string.invalid_email);
         awesomeValidation.addValidation(this, R.id.roles, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
+        awesomeValidation.addValidation(this, R.id.radioGroup, RegexTemplate.NOT_EMPTY, R.string.invalid_name);
+
 
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,21 +84,37 @@ public class SignUpActivity extends AppCompatActivity {
                     List<String> hasilRole = new ArrayList<>();
                     hasilRole.add(roles.getSelectedItem().toString());
 
-                    Toast.makeText(getApplicationContext(), "Sign Up Berhasil!", Toast.LENGTH_SHORT).show();
                     signUpSubmit(username.getText().toString(), password.getText().toString(),
                             name.getText().toString(), email.getText().toString(), hasilRole, rbAktif);
+                    Toast.makeText(getApplicationContext(), "Sign Up Berhasil!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Sign Up Gagal", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        Spinner spinner = findViewById(R.id.roles);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this,
+                R.array.numbers, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
 
-    private void signUpSubmit(String toString, String toString1, String toString2, String toString3, List<String> hasilRole, Boolean rbAktif) {
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
+
+    public void signUpSubmit(String toString, String toString1, String toString2, String toString3, List<String> hasilRole, Boolean rbAktif) {
         SignUpBody signUpBody = new SignUpBody(username, password, name, email, roles, radioGroup);
 
             UserApiService apiService = retrofit.create(UserApiService.class);
-
             Call<ResponseBody> result = apiService.signUpUser(signUpBody);
 
                     result.enqueue(new Callback<ResponseBody>() {
@@ -105,7 +123,7 @@ public class SignUpActivity extends AppCompatActivity {
                     try {
                         if (response.isSuccessful()) {
                             Log.e("TAG", "Sign Up Success" + response.body().toString());
-                            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                            Intent intent = new Intent(SignUpActivity.this, BookActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
@@ -158,12 +176,4 @@ public class SignUpActivity extends AppCompatActivity {
 //                }
 //            });
 //        }
-//    }
-//    @Override
-//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        String text = parent.getItemAtPosition(position).toString();
-//        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
-//    }
-//    @Override
-//    public void onNothingSelected(AdapterView<?> parent) {
 //    }
