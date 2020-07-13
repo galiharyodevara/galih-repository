@@ -15,5 +15,5 @@ public interface UserApiService {
     Call<LoginResult> getResultInfo(@Body LoginBody loginBody);
 
     @POST("api/user")
-    Call<ResponseBody> signUpUser(@Body SignUpBody signUpBody);
+    Call<SignUpResult> signUpUser(@Body SignUpBody signUpBody);
 }

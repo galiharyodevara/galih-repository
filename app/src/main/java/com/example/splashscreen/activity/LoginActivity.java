@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -28,12 +29,12 @@ import retrofit2.Retrofit;
 
 
 public class LoginActivity extends AppCompatActivity {
-    Button buttonLogin, buttonSignUp;
-    EditText username, password;
     private Retrofit retrofit;
-    private AwesomeValidation awesomeValidation;
+    private Button buttonLogin;
+    private TextView daftar;
+    private EditText tUsername, tPassword;
 
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -41,67 +42,42 @@ public class LoginActivity extends AppCompatActivity {
         Utility.askPermission(this);
         retrofit = RetrofitUtility.initializeRetrofit();
 
-        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
-        username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
-
-        addValidationToViews();
-
-        buttonSignUp = findViewById(R.id.buttonSignUp);
-
-        buttonSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v){
-                // action
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        tUsername = findViewById(R.id.username);
+        tPassword = findViewById(R.id.password);
         buttonLogin = findViewById(R.id.buttonLogin);
+        daftar = findViewById(R.id.buttonSignUp);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v){
-
-                if(username.getText().toString().length()==0){
-                    //jika form Username belum di isi / masih kosong
-                    username.setError("Username diperlukan!");
-                }else if(password.getText().toString().length()==0){
-                    //jika form Passwrod belum di isi / masih kosong
-                    password.setError("Password diperlukan!");
-                }else {
-                    //jika form sudah terisi semua
-                    Toast.makeText(getApplicationContext(), "Login Berhasil!", Toast.LENGTH_SHORT).show();
-                    loginSubmit(username.getText().toString(), password.getText().toString());
+            public void onClick(View view) {
+                if (tUsername.getText().toString().length() == 0) {
+                    tUsername.setError("tidak boleh kosong");
+                } else if (tPassword.getText().toString().length() == 0) {
+                    tPassword.setError("tidak boleh kosong");
+                } else {
+                    loginSubmit(tUsername.getText().toString(), tPassword.getText().toString());
                 }
             }
         });
 
-    }
-
-//    @Override
-//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        String text = parent.getItemAtPosition(position).toString();
-//        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
-//    }
-//    @Override
-//    public void onNothingSelected(AdapterView<?> parent) {
-//    }
-
-    private void addValidationToViews() {
-        awesomeValidation.addValidation(this, R.id.username, RegexTemplate.NOT_EMPTY, R.string.invalid_username);
-        String regexPassword = ".{8,}";
-        awesomeValidation.addValidation(this, R.id.password, regexPassword, R.string.invalid_password);
+        daftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // action
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void loginSubmit(String userName, String password) {
-
         LoginBody loginBody = new LoginBody(userName, password);
+        Log.e("TAG", "loginSubmit: " + userName);
+        Log.e("TAG", "loginSubmit: " + password);
 
         UserApiService apiService = retrofit.create(UserApiService.class);
-
         Call<LoginResult> result = apiService.getResultInfo(loginBody);
 
         result.enqueue(new Callback<LoginResult>() {
@@ -109,15 +85,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                 try {
                     if (response.body().isSuccess()) {
-                        Log.e("TAG", "Login Success" + response.body().toString());
-
+                        Toast.makeText(LoginActivity.this, "Logiin berhasil", Toast.LENGTH_SHORT).show();
                         AppService.setToken("Bearer " + response.body().getToken());
-                        Intent intent = new Intent(LoginActivity.this, BookActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        Log.e("TAG", "Login Failed" + response.body().toString());
-                        Toast.makeText(LoginActivity.this, "Error Login", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Logiin gagal", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -125,10 +99,9 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<LoginResult> call, Throwable t) {
-                t.printStackTrace();
+            public void onFailure(Call<LoginResult> call, Throwable t) {t.printStackTrace();
             }
         });
-    }
 
+    }
 }
