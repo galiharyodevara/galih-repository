@@ -24,7 +24,7 @@
 
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/judul"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -35,7 +35,7 @@
                 />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/penulis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -45,7 +45,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/penerbit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -55,7 +55,7 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/editTextNumber"
+                android:id="@+id/tahun"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -65,7 +65,7 @@
                 android:inputType="number" />
 
             <EditText
-                android:id="@+id/editTextNumber2"
+                android:id="@+id/harga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -82,6 +82,15 @@
                 android:layout_marginBottom="94dp"
                 android:text="Choose" />
 
+            <ImageView
+                android:id="@+id/imgChoose"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="70dp"
+                android:layout_marginLeft="150dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_add_photo_alternate_24" />
 
             <Button
                 android:id="@+id/btnUpload"

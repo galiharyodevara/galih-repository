@@ -67,9 +67,6 @@ public class SignUpActivity extends AppCompatActivity {
         awesomeValidation.addValidation(this, R.id.Email, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
         awesomeValidation.addValidation(this, R.id.name, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.invalid_name);
         awesomeValidation.addValidation(this, R.id.name, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.invalid_name);
-        //awesomeValidation.addValidation(this, R.id.name, "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$", R.string.nameerror);
-        // awesomeValidation.addValidation(this, R.id.editTextAge, Range.closed(13, 60), R.string.ageerror);
-
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +82,6 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
     private void signupSubmit(String username, String password, String Email, String name, List<String> roles, boolean active) {
         SignUpBody signupBody = new SignUpBody(username, password, Email, name,roles, active);
