@@ -6,127 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".activity.SecondFragment">
 
-    <EditText
-        android:id="@+id/judul"
-        android:layout_width="324dp"
-        android:layout_height="37dp"
-        android:ems="10"
-        android:hint="Judul"
-        android:inputType="textPersonName"
-        android:padding="6dp"
-        android:paddingLeft="7dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:singleLine="true"
+    <FrameLayout
+        android:layout_width="374dp"
+        android:layout_height="563dp"
+        android:layout_marginTop="0dp"
+        android:elevation="20dp"
+        android:padding="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.0">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-    <EditText
-        android:id="@+id/penulis"
-        android:layout_width="323dp"
-        android:layout_height="37dp"
-        android:ems="10"
-        android:hint="Penulis"
-        android:inputType="textPersonName"
-        android:paddingLeft="7dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintVertical_bias="0.25" />
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="412dp"
+                android:ems="10"
+                android:hint="Judul"
+                android:inputType="textPersonName"
+                />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="357dp"
+                android:ems="10"
+                android:hint="Penulis"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonName3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="302dp"
+                android:ems="10"
+                android:hint="Penerbit"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/editTextNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="248dp"
+                android:ems="10"
+                android:hint="Tahun"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editTextNumber2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="193dp"
+                android:ems="10"
+                android:hint="Harga"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btnChoose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="94dp"
+                android:text="Choose" />
 
 
-    <EditText
-        android:id="@+id/penerbit"
-        android:layout_width="319dp"
-        android:layout_height="37dp"
-        android:ems="10"
-        android:hint="Penerbit"
-        android:inputType="textPersonName"
-        android:padding="6dp"
-        android:paddingLeft="7dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintVertical_bias="0.35" />
-
-    <EditText
-        android:id="@+id/tahun"
-        android:layout_width="320dp"
-        android:layout_height="37dp"
-        android:ems="10"
-        android:hint="Tahun"
-        android:inputType="textPersonName"
-        android:padding="6dp"
-        android:paddingLeft="7dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+            <Button
+                android:id="@+id/btnUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="19dp"
+                android:text="Upload" />
 
 
-    <EditText
-        android:id="@+id/harga"
-        android:layout_width="324dp"
-        android:layout_height="37dp"
-        android:ems="10"
-        android:hint="Harga"
-        android:inputType="textPersonName"
-        android:padding="6dp"
-        android:paddingLeft="7dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
-
-
-    <Button
-        android:id="@+id/btnChoose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choose File"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.701" />
-
-    <Button
-        android:id="@+id/btnUpload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upload"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.884" />
+        </RelativeLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

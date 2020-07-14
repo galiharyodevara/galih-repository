@@ -39,7 +39,7 @@
         >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/btnHome"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true"
@@ -50,7 +50,7 @@
             android:textSize="10dp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnAdd"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true"
