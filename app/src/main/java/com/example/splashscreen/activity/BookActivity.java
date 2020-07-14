@@ -11,6 +11,7 @@ import com.example.splashscreen.R;
 
 public class BookActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -45,8 +45,6 @@ public class SignUpActivity extends AppCompatActivity {
     Button button;
     private boolean rbaktif;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
