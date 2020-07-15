@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,6 +79,7 @@ public class BookFragment<view> extends Fragment {
 
             @Override
             public void onFailure(Call<List<Book>> call, Throwable t) {
+                t.printStackTrace();
             }
         });
     }
@@ -85,12 +87,13 @@ public class BookFragment<view> extends Fragment {
     private void addData(List<Book> data) {
         List<BookAdapter> bookAdapterList = new ArrayList<>();
         BookAdapter bookAdapter;
-        for (Book books : data) {
+        for (Book book : data) {
+            Log.e("TAG", "addData: " + book.getJudul() );
             bookAdapter = new BookAdapter();
-            bookAdapter.setId(books.getId());
-            bookAdapter.setJudul(books.getJudul());
-            bookAdapter.setPenulis(books.getPenulis());
-            bookAdapter.setThumb(books.getThumb());
+            bookAdapter.setId(book.getId());
+            bookAdapter.setJudul(book.getJudul());
+            bookAdapter.setPenulis(book.getPenulis());
+            bookAdapter.setThumb(book.getThumb());
             bookAdapterList.add(bookAdapter);
         }
         memberListAdapter.addAll(bookAdapterList);
