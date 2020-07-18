@@ -1,4 +1,4 @@
-package com.example.splashscreen.activity;
+package com.example.splashscreen.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.splashscreen.R;
 import com.example.splashscreen.apiHelper.RetrofitUtility;
+import com.example.splashscreen.model.ApiResponse;
 import com.example.splashscreen.model.Book;
 import com.example.splashscreen.model.LoginResult;
 import com.example.splashscreen.service.AppService;
@@ -143,46 +144,28 @@ public class SecondFragment extends Fragment {
         book.setTahun(Integer.valueOf(tahun));
         book.setThumb(base64Image);
 
-        BookApiService apiService = retrofit.create(BookApiService.class);
-        Call<Book> result = apiService.insertNewBook(AppService.getToken(), book);
-        result.enqueue(new Callback<Book>() {
-            @Override
-            public void onResponse(Call<Book> call, Response<Book> response) {
 
+        BookApiService apiService = retrofit.create(BookApiService.class);
+        Call<ApiResponse> result = apiService.insertNewBook(AppService.getToken(), book);
+        result.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.body().isSuccess()) {
                     Log.e("TAG", "Berhasil Tambah Buku");
-                    Toast.makeText(getActivity(),"Add sukses",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Add sukses", Toast.LENGTH_SHORT).show();
 
                 } else {
                     Log.e("TAG", "Gagal Tambah Buku");
-                    Toast.makeText(getActivity(),"Add gagal" + response.message(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Add gagal" + response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Book> call, Throwable t) {t.printStackTrace(); }
-            });
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
-
-//        BookApiService apiService = retrofit.create(BookApiService.class);
-//        Call<LoginResult> result = apiService.insertNewBook(AppService.getToken(), book);
-//        result.enqueue(new Callback<LoginResult>() {
-//            @Override
-//            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
-//                if (response.body().isSuccess()) {
-//                    Log.e("TAG", "Berhasil Tambah Buku");
-//                    Toast.makeText(getActivity(),"Add sukses",Toast.LENGTH_SHORT).show();
-//
-//                } else {
-//                    Log.e("TAG", "Gagal Tambah Buku");
-//                    Toast.makeText(getActivity(),"Add gagal" + response.message(),Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<LoginResult> call, Throwable t) {t.printStackTrace(); }
-//        });
-//    }
 
     private void initRetrofit() {
         retrofit = RetrofitUtility.initializeRetrofit();

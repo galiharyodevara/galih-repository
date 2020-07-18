@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.splashscreen.R;
+import com.example.splashscreen.fragment.BookFragment;
+import com.example.splashscreen.fragment.DialogFragment;
+import com.example.splashscreen.fragment.SecondFragment;
 
 public class BookActivity extends AppCompatActivity {
 
@@ -38,10 +41,11 @@ public class BookActivity extends AppCompatActivity {
                 openSecondFragment();
             }
         });
+
     }
 
 
-    private void openHomeFragment() {
+    public void openHomeFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         BookFragment strCode = new BookFragment();
@@ -49,7 +53,7 @@ public class BookActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void openSecondFragment() {
+    public void openSecondFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SecondFragment strCode = new SecondFragment();
@@ -57,5 +61,11 @@ public class BookActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-
+    public void openDialogFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        DialogFragment strCode = new DialogFragment();
+        fragmentTransaction.replace(R.id.content, strCode,"dialog fragment");
+        fragmentTransaction.commit();
+    }
 }

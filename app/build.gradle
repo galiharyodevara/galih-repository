@@ -40,4 +40,15 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     implementation 'com.basgeekball:awesome-validation:4.2'
+
+    //lottie animation
+//    implementation 'com.airbnb.android:lottie:3.4.1'
+    //material
+    implementation 'com.google.android.material:material:1.1.0'
+
+    //validator
+//    implementation 'com.github.nisrulz:validatetor:1.0.0'
+    //Toasty
+//    implementation 'com.github.GrenderG:Toasty:1.4.2'
+    //recyclew view
 }

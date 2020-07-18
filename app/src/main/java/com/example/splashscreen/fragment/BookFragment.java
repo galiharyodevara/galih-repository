@@ -1,4 +1,4 @@
-package com.example.splashscreen.activity;
+package com.example.splashscreen.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.splashscreen.R;
+import com.example.splashscreen.activity.BookActivity;
 import com.example.splashscreen.adapter.BookAdapter;
 import com.example.splashscreen.adapter.MemberListAdapter;
 import com.example.splashscreen.service.AppService;
@@ -58,7 +59,7 @@ public class BookFragment<view> extends Fragment {
     private void initRecyclerView() {
         listMember = view.findViewById(R.id.listMember);
         linearLayoutManager = new LinearLayoutManager(context);
-        memberListAdapter = new MemberListAdapter();
+        memberListAdapter = new MemberListAdapter(context, this);
         listMember.setLayoutManager(linearLayoutManager);
         listMember.setAdapter(memberListAdapter);
     }
@@ -97,6 +98,10 @@ public class BookFragment<view> extends Fragment {
             bookAdapterList.add(bookAdapter);
         }
         memberListAdapter.addAll(bookAdapterList);
+    }
+
+    public void openFragmentDialog(int id) {
+        ((BookActivity)getActivity()).openDialogFragment();
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.splashscreen.adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.splashscreen.R;
+import com.example.splashscreen.fragment.BookFragment;
+import com.example.splashscreen.service.AppService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +24,16 @@ public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.Me
 
 
     private List<BookAdapter> bookAdapterList;
-    public MemberListAdapter() {
+    private Context context;
+
+    private BookFragment fragment;
+
+
+
+    public MemberListAdapter(Context context, BookFragment fragment) {
         bookAdapterList = new ArrayList<>();
+        this.context = context;
+        this.fragment = fragment;
     }
     private void add(BookAdapter item) {
         bookAdapterList.add(item);
@@ -34,11 +45,7 @@ public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.Me
         }
     }
 
-    private Bitmap getBitmap(String base64String) {
-        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        return decodedByte;
-    }
+
 
     @Override
     public MemberViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,8 +60,23 @@ public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.Me
         holder.bookThumb.setImageBitmap(bitmap);
         holder.judul.setText(bookAdapter.getJudul());
         holder.penulis.setText(bookAdapter.getPenulis());
+
+        int bookId = bookAdapterList.get(position).getId();
+
         holder.bookThumb.setOnClickListener(view -> {
             Log.e("TAG", "onBindViewHolder: " + bookAdapterList.get(position).getId());
+            fragment.openFragmentDialog(bookId);
+            AppService.setIdBook(bookId);
+        });
+
+        holder.judul.setOnLongClickListener(view -> {
+            Log.e("TAG", "long clik listener: ");
+            return true;
+        });
+
+        holder.bookThumb.setOnLongClickListener(view -> {
+            Log.e("TAG", "long click listener: ");
+            return true;
         });
     }
 
@@ -81,6 +103,12 @@ public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.Me
             judul = itemView.findViewById(R.id.judul);
             penulis = itemView.findViewById(R.id.penulis);
         }
+    }
+
+    private Bitmap getBitmap(String base64String) {
+        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedByte;
     }
 }
 
